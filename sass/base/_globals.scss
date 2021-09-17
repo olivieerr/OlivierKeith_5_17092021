@@ -1,0 +1,62 @@
+/* couleur de fond*/
+body {
+  background-color: $primaire;
+}
+ .main {
+   max-width: 1900px;
+   min-width: 230px;
+   margin: auto;
+ }
+
+ a {
+   text-decoration: none;
+   color: black;
+ }
+
+ ul {
+   list-style-type: none;
+   padding: 0;
+   display: flex;
+   align-items: stretch;
+   @media (max-width: $lit_Size) {
+     justify-content: space-between;
+   }
+ }
+
+ li {
+   padding: 20px;
+ }
+
+ header {
+   display: flex;
+   justify-content: space-between;
+   @media (max-width: $lit_Size) {
+     flex-direction: column;
+   }
+ }
+
+ #list {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+ }
+
+ .etiquette {
+   width: 35%;
+   border: 1px solid black;
+   border-radius: 10px;
+   overflow: hidden;
+   margin: 10px;
+   img {
+     width: 100%;
+
+   }
+   @media (max-width: $lit_Size) {
+     width: 90%;
+   }
+ }
+
+ .contenu {
+   text-align: center;
+ }
+
