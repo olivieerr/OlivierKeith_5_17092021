@@ -16,7 +16,7 @@ function createStickies(allTeddies, i) {
 
     //Mise en place du lien
     stickies.appendChild(testA);
-    testA.setAttribute("href", "http://localhost:3000/product.html?id=" + allTeddies[i]._id);
+    testA.setAttribute("href", "product.html?id=" + allTeddies[i]._id);
     testA.classList.add("lien");
 
     //mise en place de l'image
