@@ -60,3 +60,27 @@ body {
    text-align: center;
  }
 
+ .solo {
+   width: 70%;
+   border: 1px solid black;
+   border-radius: 10px;
+   overflow: hidden;
+   margin: auto;
+   img {
+     width: 100%;
+   }
+   p {
+     margin: 10px;
+   }
+ }
+
+ form {
+   display: flex;
+   justify-content: space-between;
+   padding: 10px;
+ }
+
+ .nomber, .color, .button {
+   width: 25%;
+ }
+
