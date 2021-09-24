@@ -3,13 +3,15 @@ console.log("Hello world");
 //Rappel de nos données stockées dans le localStorage
 let article = JSON.parse(localStorage.getItem("article"));
 
-//creation des elements
-function createBasket(article, i) {
+
+
+//creation des elements du panier
+function createBasket(article, teddy, i) {
     const order = document.createElement("div");
 
-
-    let elt = document.getElementById("basket");
+    const elt= document.getElementById("basket");
     console.log(elt);
+
 
     elt.appendChild(order);
     order.classList.add("line");
@@ -27,14 +29,21 @@ function createBasket(article, i) {
     order.appendChild(total);
 
     //injection des elements
-    name.innerHTML = article[i].name;
+    name.innerHTML = teddy.name;
     color.innerHTML = article[i].color;
     quantity.innerHTML = article[i].quantity;
-    price.innerHTML = article[i].price /100 + " €";
-    total.innerHTML = article[i].quantity * article[i].price + " €";
+    price.innerHTML = teddy.price + " €";
+    total.innerHTML = article[i].quantity * teddy.price + " €";
 
 }
 
+//Affichage des toutes les lignes du panier
 for (let i in article) {
-    createBasket(article, i);
+    fetch("http://localhost:3000/api/teddies/" + article[i].id)
+        .then(response => response.json())
+        .then((teddy) => {
+            console.log(teddy);
+            console.log(article[i].id  + " " + article[i].price + " " + article[i].quantity);
+            createBasket(article, teddy, i);
+        })
 }
