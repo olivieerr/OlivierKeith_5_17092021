@@ -90,4 +90,61 @@ form {
   width: 25%;
 }
 
+.line {
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-between;
+}
+.line .minusImg {
+  width: 10%;
+}
+.line p {
+  padding: 10px;
+}
+
+.global {
+  display: flex;
+  justify-content: end;
+  margin: 10px auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.global p {
+  padding: 10px;
+}
+
+.formulaire {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px auto;
+}
+.formulaire h2 {
+  width: 100%;
+  text-align: center;
+}
+.formulaire input {
+  width: 35%;
+  margin: 10px;
+}
+
+.empty {
+  width: 70%;
+  margin: auto;
+}
+.empty h2 {
+  color: blueviolet;
+  text-align: center;
+}
+.empty p {
+  text-align: center;
+}
+
 /*# sourceMappingURL=style.css.map */

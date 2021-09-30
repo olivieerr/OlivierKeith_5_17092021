@@ -115,7 +115,7 @@ function sendToBasket (teddy){
         console.log("prix du teddy : "+teddy.price);
         console.log("quantite de teddy : "+ quantity);
         console.log("couleur du teddy : " + color);
-        let beer = new articles(teddy._id, color, quantity,);
+        let beer = new articles(teddy._id, color, quantity);
         let article = JSON.parse(localStorage.getItem("article"));
 
         //Verification si il y a deja des objets dans le panier
