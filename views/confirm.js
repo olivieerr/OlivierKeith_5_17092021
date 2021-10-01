@@ -1,8 +1,10 @@
 console.log("Hello world")
 
-let teddyId = JSON.parse(localStorage.getItem("teddyId"));
-console.log(teddyId.orderId)
-console.log(teddyId.totalPrice)
+let teddyId = JSON.parse(localStorage.getItem("teddyId"))
+console.log(localStorage.getItem("teddyId"))
+console.log(teddyId)
+console.log(teddyId[0].orderId)
+console.log(teddyId[0].totalPrice)
 
 function createTicket() {
 
@@ -24,9 +26,12 @@ function createTicket() {
     thanks.classList.add("thank")
 
     title.innerHTML = "Récapitulatif de votre commande"
-    orderNumber.innerHTML = "Votre numéro de commande : " + teddyId.orderId
-    orderPrice.innerHTML = "Le prix total de votre commande" +teddyId.totalPrice
+    orderNumber.innerHTML = "Votre numéro de commande : " + teddyId[0].orderId
+    orderPrice.innerHTML = "Le prix total de votre commande : " + teddyId[0].totalPrice + " €"
     thanks.innerHTML = "Nous vous remercions de votre commande"
+
+    //On nettoie le localStorage
+    localStorage.clear()
 
 }
 

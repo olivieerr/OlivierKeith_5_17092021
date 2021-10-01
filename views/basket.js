@@ -3,6 +3,7 @@ console.log("Hello world");
 //Rappel de nos données stockées dans le localStorage
 let article = JSON.parse(localStorage.getItem("article"));
 let totaux = 0;
+const globalPrice = document.createElement("p");
 let regexMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 let regexAddress = /\d([ ])(\w+[ ]?)+/;
 //let totaux = 0;
@@ -39,6 +40,8 @@ function createTitle() {
 
     elt.appendChild(title);
 
+    title.classList.add("center")
+
     title.innerHTML = "Votre sélection";
 
 }
@@ -56,6 +59,7 @@ function createBasket(article,teddy, i) {
     orderLine.classList.add("line");
 
     const image = document.createElement("img");
+    const group = document.createElement("div")
     const name = document.createElement("h2");
     const color = document.createElement("p");
     const quantity = document.createElement("p");
@@ -63,9 +67,10 @@ function createBasket(article,teddy, i) {
     const total = document.createElement("p");
 
     orderLine.appendChild(image);
-    orderLine.appendChild(name);
-    orderLine.appendChild(color);
-    orderLine.appendChild(quantity);
+    orderLine.appendChild(group)
+    group.appendChild(name);
+    group.appendChild(color);
+    group.appendChild(quantity);
     orderLine.appendChild(price);
     orderLine.appendChild(total);
 
@@ -73,24 +78,16 @@ function createBasket(article,teddy, i) {
     image.classList.add("minusImg");
     image.setAttribute( "src", teddy.imageUrl);
 
+    group.classList.add("group")
+    total.classList.add("end")
+
 
     //injection des elements
-    name.innerHTML = "Nom : " + teddy.name;
-    color.innerHTML = "couleur : " + article[i].color;
-    quantity.innerHTML = "quantité : " + article[i].quantity;
-    price.innerHTML = "prix : " + teddy.price + " €";
-    total.innerHTML = "total : " + article[i].quantity * teddy.price + " €";
-
-    /*test
-    let som = 0;
-    let prix = parseInt(teddy.price, 10);
-    let quantite = parseInt(article[i].quantity, 10);
-
-    som += prix * quantite;
-    console.log("som dans createBasket", som);
-    return som;
-    //return totaux += article[i].quantity * teddy.price*/
-
+    name.innerHTML = teddy.name;
+    color.innerHTML = "Couleur choisie : " + article[i].color;
+    quantity.innerHTML = "Quantité désirée : " + article[i].quantity;
+    price.innerHTML = "Prix unitaire : " + teddy.price /100 + " €";
+    total.innerHTML = "Total : " + article[i].quantity * teddy.price / 100 + " €";
 
 }
 
@@ -100,9 +97,9 @@ function createBasket(article,teddy, i) {
 }*/
 
 
-function createTotal (totaux) {
+function createTotal () {
     const orderGlobalPrice = document.createElement("div")
-    const globalPrice = document.createElement("p");
+    //const globalPrice = document.createElement("p");
 
     let elt = document.getElementById("price");
 
@@ -110,7 +107,7 @@ function createTotal (totaux) {
     orderGlobalPrice.classList.add("global");
     orderGlobalPrice.appendChild(globalPrice)
 
-    globalPrice.innerHTML = "Total de votre commande : " + totaux;
+    //globalPrice.innerHTML = "Total de votre commande : " + totaux;
 
 }
 
@@ -148,18 +145,23 @@ function createForm() {
     firstName.setAttribute("type", "text");
     firstName.setAttribute("id", "firstName");
     firstName.setAttribute("placeholder", "Votre nom")
+    firstName.setAttribute("value", "test")
     lastName.setAttribute("type", "text");
     lastName.setAttribute("id", "lastName");
     lastName.setAttribute("placeholder", "Votre prénom")
+    lastName.setAttribute("value", "test")
     address.setAttribute("type", "text");
     address.setAttribute("id", "address");
     address.setAttribute("placeholder", "Votre adresse")
+    address.setAttribute("value", "10 rue de ci")
     city.setAttribute("type", "text");
     city.setAttribute("id", "city");
     city.setAttribute("placeholder", "Votre ville")
+    city.setAttribute("value", "berg")
     email.setAttribute("type", "text");
     email.setAttribute("id", "email");
     email.setAttribute("placeholder", "votre adresse mail")
+    email.setAttribute("value", "test@res.co")
     send.setAttribute("id", "validate")
     send.setAttribute("type", "button");
     send.setAttribute("value", "Valider");
@@ -247,6 +249,9 @@ function sendOrder(send) {
             resume.push(infos);
             localStorage.setItem("teddyId", JSON.stringify(resume))
 
+            //console.log(localStorage.getItem("article"))
+            console.log(localStorage.getItem("teddyId"))
+
             //redirection vers page de confirmation
             //document.location.href = "confirm.html"
 
@@ -286,6 +291,7 @@ function noBasket() {
 
 //Affichage des toutes les lignes du panier
 function basketLines(article) { //todo nom achanger ou voir si encore besoin
+    createTotal()
     for (let i in article) {
 
         fetch("http://localhost:3000/api/teddies/" + article[i].id)
@@ -302,18 +308,20 @@ function basketLines(article) { //todo nom achanger ou voir si encore besoin
 
                 let prix = parseInt(teddy.price, 10);
                 let quantite = parseInt(article[i].quantity, 10);
-                totaux += (prix * quantite);
+                totaux += (prix * quantite) / 100;
 
 
                 console.log("dans la promise teddy", totaux);
 
+                globalPrice.innerHTML = "Total de votre commande : " + totaux + " €";
+
                 //return totaux;
 
-                if (parseInt(i)+1 === article.length) {
+                /*if (parseInt(i)+1 === article.length) {
                     console.log("totaux dans le if", totaux)
                     createTotal(totaux)
 
-                }
+                }*/
 
 
 

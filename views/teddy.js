@@ -40,15 +40,23 @@ function createSticky(teddy) {
 
     //décalration des differents elements
     let titre = document.createElement("h2");
+    let all = document.createElement("div")
     let description = document.createElement("p");
+    let left = document.createElement("div")
     let prix = document.createElement("p");
+
+    all.classList.add("all")
+    description.classList.add("right")
+    left.classList.add("left")
 
     //Mise en place des elements precedents déclarés
     banniere.appendChild(titre);
     titre.innerHTML = teddy.name;
-    banniere.appendChild(description);
+    banniere.appendChild(all);
+    all.appendChild(description)
     description.innerHTML = teddy.description;
-    banniere.appendChild(prix);
+    all.appendChild(left)
+    left.appendChild(prix);
     prix.innerHTML = teddy.price /100 + " €";
 
     //mise en place du formulaire : couleur + bouton ajouter
@@ -104,6 +112,23 @@ function whatColor() {
     return color;
 }
 
+/*function noServer() {
+    const noSerever = document.createElement("div")
+    const oups = document.createElement("h2")
+    const exp = document.createElement("p")
+
+    let elt = document.getElementById("list")
+
+    elt.appendChild(noSerever)
+    noSerever.appendChild(oups)
+    noSerever.appendChild(exp)
+
+    noSerever.classList.add("wrong")
+
+    oups.innerHTML = "Oups, quelque chose s'est mal passé"
+    exp.innerHTML = "Verifier votre connexion à internet et/ou que le serveur soit bien allumé"
+}*/
+
 //Ecoute sur le bouton "ajouter au panier"
 function sendToBasket (teddy){
     const btn = document.getElementById("btn");
@@ -150,7 +175,12 @@ function getTeddy() {
             console.log(teddy);
             createSticky(teddy);
             sendToBasket(teddy);
-    });
+    })
+        .catch((e) => {
+            console.error(e)
+            console.log("problème de connexion au serveur")
+            noServer()
+        });
 }
 
 getTeddy();
