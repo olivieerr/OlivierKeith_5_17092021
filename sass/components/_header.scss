@@ -1,0 +1,7 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: $lit_size) {
+    flex-direction: column;
+  }
+}

@@ -1,9 +1,7 @@
 console.log("hello world");
 
-/*let params = new URL(document.location).searchParams;
-let id = params.get("id");
-console.log(params);
-console.log(id);*/
+//constante globale
+const send = document.createElement("button");
 
 class articles {
     constructor(id, color, quantity) {
@@ -48,6 +46,8 @@ function createSticky(teddy) {
     all.classList.add("all")
     description.classList.add("right")
     left.classList.add("left")
+    titre.classList.add("pink")
+    prix.classList.add("pink")
 
     //Mise en place des elements precedents déclarés
     banniere.appendChild(titre);
@@ -64,10 +64,11 @@ function createSticky(teddy) {
     const color = document.createElement("select");
     //const options = document.createElement("option")
     const quantity = document.createElement("select");
-    const send = document.createElement("button");
+    //const send = document.createElement("button");
 
     banniere.appendChild(form);
     color.classList.add("color");
+    quantity.classList.add("alignEnd")
     form.appendChild(color);
     color.setAttribute("id", "color");
     color.setAttribute("name", "couleur choisie");
@@ -98,6 +99,7 @@ function createSticky(teddy) {
     send.innerHTML = "Ajouter au panier";
 }
 
+//fonction permettant de récupéré la quantité de produit désirée
 function nbTeddies () {
     let selectQuantity = document.getElementById("quantity");
     let quantity = selectQuantity.options[selectQuantity.selectedIndex].value;
@@ -105,6 +107,7 @@ function nbTeddies () {
     return quantity;
 }
 
+//Fonction permettant de recupéré la couleur du produit désiré
 function whatColor() {
     let selectColor = document.getElementById("color");
     let color = selectColor.options[selectColor.selectedIndex].value;
@@ -112,22 +115,23 @@ function whatColor() {
     return color;
 }
 
-/*function noServer() {
+//fonction en cas d'échec de contacter le serveur
+function noServer() {
     const noSerever = document.createElement("div")
     const oups = document.createElement("h2")
     const exp = document.createElement("p")
 
-    let elt = document.getElementById("list")
+    let elt = document.getElementById("presentation")
 
     elt.appendChild(noSerever)
     noSerever.appendChild(oups)
     noSerever.appendChild(exp)
 
-    noSerever.classList.add("wrong")
+    noSerever.classList.add("info")
 
     oups.innerHTML = "Oups, quelque chose s'est mal passé"
     exp.innerHTML = "Verifier votre connexion à internet et/ou que le serveur soit bien allumé"
-}*/
+}
 
 //Ecoute sur le bouton "ajouter au panier"
 function sendToBasket (teddy){
@@ -160,14 +164,18 @@ function sendToBasket (teddy){
 
         }
         console.log("le nombre total d'article dans le panier : " + article.length);
+        send.classList.add("green")
+        send.innerHTML = "ajouté !"
     });
 }
 
+//Récupération des informations récues de la pages précedente
 let searchParams = new URLSearchParams(window.location.search);
 console.log(searchParams.has("id"))
 let id = searchParams.get("id");
 console.log(id);
 
+//fonction récupérant les information envoyées en d'afficher le bon produit
 function getTeddy() {
     fetch("http://localhost:3000/api/teddies/" + id)
         .then(response => response.json())

@@ -1,0 +1,37 @@
+.solo {
+  width: 80%;
+  font-size: larger;
+  @include box-border;
+  img {
+    width: 100%;
+  }
+  p {
+    margin: 10px;
+  }
+  @media (min-width: $mid_size) {
+    display: flex;
+    img {
+      width: 50%;
+    }
+  }
+  @media (max-width: $lit_size) {
+    font-size: medium;
+  }
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nomber, .color, .button {
+  width: 25%;
+  text-align: center;
+  margin: 15px;
+  padding: 7px;
+  @media (max-width: $lit_size) {
+    padding: 5px;
+    margin: 8px;
+
+  }
+}

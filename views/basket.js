@@ -2,38 +2,15 @@ console.log("Hello world");
 
 //Rappel de nos données stockées dans le localStorage
 let article = JSON.parse(localStorage.getItem("article"));
+
+//variables et constantes gloables
 let totaux = 0;
 const globalPrice = document.createElement("p");
 let regexMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 let regexAddress = /\d([ ])(\w+[ ]?)+/;
-//let totaux = 0;
 
-//classe de test line
-class line {
-    constructor( id, name, color, quantity, price, imgUrl) {
-        this.id = id;
-        this.name = name;
-        this.color = color;
-        this.quantity = quantity;
-        this.price = price;
-        this.imgUrl = imgUrl;
-
-    }
-}
-
-class order {
-    constructor(firstName, lastName, address, city, email, teddyId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.email = email;
-        this.teddyId = teddyId;
-    }
-}
 
 function createTitle() {
-
     const title = document.createElement("h1");
 
     let elt = document.getElementById("basket");
@@ -46,7 +23,24 @@ function createTitle() {
 
 }
 
-//creation des elements du panier
+function noServer() {
+    const noSerever = document.createElement("div")
+    const oups = document.createElement("h2")
+    const exp = document.createElement("p")
+
+    let elt = document.getElementById("basket")
+
+    elt.appendChild(noSerever)
+    noSerever.appendChild(oups)
+    noSerever.appendChild(exp)
+
+    noSerever.classList.add("info")
+
+    oups.innerHTML = "Oups, quelque chose s'est mal passé"
+    exp.innerHTML = "Verifier votre connexion à internet et/ou que le serveur soit bien allumé"
+}
+
+//creation des élements du panier
 function createBasket(article,teddy, i) {
     const orderLine = document.createElement("div");
 
@@ -74,13 +68,18 @@ function createBasket(article,teddy, i) {
     orderLine.appendChild(price);
     orderLine.appendChild(total);
 
-    //ajout des attributs particlieurs
+    //ajout des attributs particliers
     image.classList.add("minusImg");
     image.setAttribute( "src", teddy.imageUrl);
 
+    name.classList.add("pink")
     group.classList.add("group")
     total.classList.add("end")
 
+    //ajout de la classe "elastic"
+    name.classList.add("elastic")
+    color.classList.add("elastic")
+    quantity.classList.add("elastic")
 
     //injection des elements
     name.innerHTML = teddy.name;
@@ -91,23 +90,14 @@ function createBasket(article,teddy, i) {
 
 }
 
-/*function test (teddy, article, i) {
-
-    return price += parseInt(teddy.price, 10) * parseInt(article[i].quantity, 10)
-}*/
-
-
 function createTotal () {
     const orderGlobalPrice = document.createElement("div")
-    //const globalPrice = document.createElement("p");
 
     let elt = document.getElementById("price");
 
     elt.appendChild(orderGlobalPrice);
     orderGlobalPrice.classList.add("global");
     orderGlobalPrice.appendChild(globalPrice)
-
-    //globalPrice.innerHTML = "Total de votre commande : " + totaux;
 
 }
 
@@ -165,8 +155,6 @@ function createForm() {
     send.setAttribute("id", "validate")
     send.setAttribute("type", "button");
     send.setAttribute("value", "Valider");
-
-    //validateOrder()
 
 }
 
@@ -236,8 +224,6 @@ function sendOrder(send) {
             console.log(number)
             console.log("id order", number.orderId)
 
-            //createTicket(returnOrder)
-
             //mise dans un objet JSON le numéro de la commande et le prix total
             let infos = {
                 orderId: number.orderId,
@@ -249,16 +235,30 @@ function sendOrder(send) {
             resume.push(infos);
             localStorage.setItem("teddyId", JSON.stringify(resume))
 
-            //console.log(localStorage.getItem("article"))
             console.log(localStorage.getItem("teddyId"))
-
-            //redirection vers page de confirmation
-            //document.location.href = "confirm.html"
 
         })
         .then(() => {
         //redirection vers page de confirmation
         document.location.href = "confirm.html"
+    })
+        .catch((e) => {
+        console.error(e)
+        const err = document.createElement("div");
+        const text = document.createElement("h2");
+        const exp = document.createElement("p")
+
+
+        let elt = document.getElementById("form");
+
+        elt.appendChild(err);
+        err.appendChild(text);
+        text.appendChild(exp)
+
+        err.classList.add("info");
+
+        text.innerHTML = "Une erreur technique est survenue";
+        exp.innerHTML = "Merci de réessayer plus tard";
     })
 }
 
@@ -280,9 +280,7 @@ function noBasket() {
     container.appendChild(empty)
     container.appendChild(text)
 
-    container.classList.add("empty")
-
-
+    container.classList.add("info")
 
     empty.innerHTML = "Votre panier est actuellement vide."
     text.innerHTML = "Pas de doute, vous craquerez sûrement pour nos magnifiques nounours"
@@ -293,11 +291,7 @@ function noBasket() {
 function basketLines(article) { //todo nom achanger ou voir si encore besoin
     createTotal()
     for (let i in article) {
-
         fetch("http://localhost:3000/api/teddies/" + article[i].id)
-        /*let prix = parseInt(test[i].price, 10);
-        let quantite = parseInt(article[i].quantity, 10);
-        totaux += (prix * quantite)*/
             .then(response => response.json())
             .then((teddy) => {
                 console.log(teddy);
@@ -310,30 +304,17 @@ function basketLines(article) { //todo nom achanger ou voir si encore besoin
                 let quantite = parseInt(article[i].quantity, 10);
                 totaux += (prix * quantite) / 100;
 
-
                 console.log("dans la promise teddy", totaux);
 
-                globalPrice.innerHTML = "Total de votre commande : " + totaux + " €";
-
-                //return totaux;
-
-                /*if (parseInt(i)+1 === article.length) {
-                    console.log("totaux dans le if", totaux)
-                    createTotal(totaux)
-
-                }*/
-
-
+                globalPrice.innerHTML = "Total de votre commande : <span class=\"pink bold\"> "+ totaux + " €</span>";
 
             })
-
-        //console.log("le prix apres le then : " + price);
+            .catch((e) => {
+                console.error(e)
+                noServer()
+            })
     }
-
     console.log("le prix à l'issue de la boucle apres el for : ", totaux);
-    //createTotal(totaux);
-
-
 }
 
 if(article) {

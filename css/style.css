@@ -4,8 +4,8 @@ body {
 }
 
 .main {
-  max-width: 1900px;
-  min-width: 230px;
+  max-width: 1920px;
+  min-width: 320px;
   margin: auto;
 }
 
@@ -34,6 +34,74 @@ h2, p {
   margin: 0;
 }
 
+.all {
+  display: flex;
+  justify-content: space-between;
+}
+.all .right {
+  width: 70%;
+}
+
+.center {
+  text-align: center;
+}
+
+.end {
+  margin: 5px;
+}
+
+.alignEnd {
+  text-align: end;
+}
+
+.info {
+  text-align: center;
+}
+.info h2 {
+  color: #8A2BE2;
+  margin: 20px;
+}
+.info p {
+  margin: 10px;
+}
+.info span {
+  color: #8A2BE2;
+}
+
+.green {
+  color: #027D0B;
+  font-weight: bold;
+}
+
+.pink {
+  color: #8A2BE2;
+}
+
+.right {
+  text-align: justify;
+}
+
+.left {
+  display: flex;
+  align-items: end;
+  font-weight: bold;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.contenu {
+  text-align: center;
+}
+@media (min-width: 900px) {
+  .contenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -42,6 +110,13 @@ header {
   header {
     flex-direction: column;
   }
+}
+
+.elastic {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 95%;
 }
 
 #list {
@@ -55,7 +130,7 @@ header {
   border: 1px solid black;
   border-radius: 10px;
   overflow: hidden;
-  margin: 10px;
+  margin: 20px auto;
 }
 .etiquette img {
   width: 100%;
@@ -69,38 +144,49 @@ header {
 .etiquette p {
   margin: 10px;
 }
+@media (max-width: 900px) {
+  .etiquette {
+    width: 45%;
+  }
+  .etiquette img {
+    height: 250px;
+  }
+}
 @media (max-width: 494px) {
   .etiquette {
-    width: 90%;
+    width: 80%;
+  }
+  .etiquette img {
+    height: 200px;
   }
 }
 
-.contenu {
-  text-align: center;
-}
-
-.right {
-  text-align: justify;
-}
-
-.left {
-  display: flex;
-  align-items: end;
-  font-weight: bold;
-}
-
 .solo {
-  width: 60%;
+  width: 80%;
+  font-size: larger;
   border: 1px solid black;
   border-radius: 10px;
   overflow: hidden;
-  margin: auto;
+  margin: 20px auto;
 }
 .solo img {
   width: 100%;
 }
 .solo p {
   margin: 10px;
+}
+@media (min-width: 900px) {
+  .solo {
+    display: flex;
+  }
+  .solo img {
+    width: 50%;
+  }
+}
+@media (max-width: 494px) {
+  .solo {
+    font-size: medium;
+  }
 }
 
 form {
@@ -110,6 +196,15 @@ form {
 
 .nomber, .color, .button {
   width: 25%;
+  text-align: center;
+  margin: 15px;
+  padding: 7px;
+}
+@media (max-width: 494px) {
+  .nomber, .color, .button {
+    padding: 5px;
+    margin: 8px;
+  }
 }
 
 .line {
@@ -117,30 +212,59 @@ form {
   border: 1px solid black;
   border-radius: 10px;
   overflow: hidden;
-  margin: 10px auto;
+  margin: 20px auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: larger;
 }
 .line .minusImg {
   width: 20%;
 }
-.line .group {
-  display: flex;
-  flex-direction: column;
+@media (max-width: 900px) {
+  .line {
+    font-size: medium;
+  }
+}
+@media (max-width: 494px) {
+  .line {
+    width: 90%;
+  }
+  .line img {
+    display: none;
+  }
+  .line h2, .line p {
+    margin: 5px;
+  }
+}
+
+.group {
+  width: 30%;
+}
+@media (max-width: 494px) {
+  .group {
+    width: 45%;
+  }
 }
 
 .global {
   width: 80%;
   display: flex;
   justify-content: end;
-  margin: 10px auto;
   border: 1px solid black;
   border-radius: 10px;
   overflow: hidden;
+  margin: 20px auto;
+  font-size: larger;
 }
 .global p {
   padding: 10px;
+}
+@media (max-width: 494px) {
+  .global {
+    width: 90%;
+    font-size: medium;
+  }
 }
 
 .formulaire {
@@ -160,34 +284,16 @@ form {
 .formulaire input {
   width: 35%;
   margin: 10px;
+  padding: 10px;
 }
-
-.empty {
-  width: 70%;
-  margin: auto;
-}
-.empty h2 {
-  color: blueviolet;
-  text-align: center;
-}
-.empty p {
-  text-align: center;
-}
-
-.all {
-  display: flex;
-  justify-content: space-between;
-}
-.all .right {
-  width: 70%;
-}
-
-.center {
-  text-align: center;
-}
-
-.end {
-  margin-right: 5px;
+@media (max-width: 494px) {
+  .formulaire {
+    width: 90%;
+  }
+  .formulaire input {
+    width: 80%;
+    font-size: larger;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

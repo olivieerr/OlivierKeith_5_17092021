@@ -3,8 +3,8 @@ body {
   background-color: $primaire;
 }
  .main {
-   max-width: 1900px;
-   min-width: 230px;
+   max-width: $max-width;
+   min-width: $min-width;
    margin: auto;
  }
 
@@ -18,7 +18,7 @@ body {
    padding: 0;
    display: flex;
    align-items: stretch;
-   @media (max-width: $lit_Size) {
+   @media (max-width: $lit_size) {
      justify-content: space-between;
    }
  }
@@ -31,47 +31,51 @@ body {
    margin: 0;
  }
 
- header {
+
+
+
+
+ .all {
    display: flex;
    justify-content: space-between;
-   @media (max-width: $lit_Size) {
-     flex-direction: column;
+   .right {
+     width: 70%;
    }
  }
 
- #list {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
+ .center {
+   text-align: center;
  }
 
- .etiquette {
-   width: 35%;
-   border: 1px solid black;
-   border-radius: 10px;
-   overflow: hidden;
-   margin: 10px;
-   img {
-     width: 100%;
-     height: 350px;
-     object-fit: cover;
-     object-position: center;
+ .end {
+   margin: 5px;
+ }
 
-   }
+ .alignEnd {
+   text-align: end;
+ }
+
+ .info {
+   text-align: center;
    h2 {
-     margin: 5px;
+     color: $secondary;
+     margin: 20px;
    }
    p {
      margin: 10px;
    }
-
-   @media (max-width: $lit_Size) {
-     width: 90%;
+   span {
+     color: $secondary;
    }
  }
 
- .contenu {
-   text-align: center;
+ .green {
+   color: $tertiare;
+   font-weight: bold;
+ }
+
+ .pink {
+   color: $secondary;
  }
 
 .right{
@@ -83,104 +87,6 @@ body {
   font-weight: bold;
 }
 
- .solo {
-   width: 60%;
-   border: 1px solid black;
-   border-radius: 10px;
-   overflow: hidden;
-   margin: auto;
-   img {
-     width: 100%;
-   }
-   p {
-     margin: 10px;
-   }
- }
-
- form {
-   display: flex;
-   justify-content: space-between;
- }
-
- .nomber, .color, .button {
-   width: 25%;
- }
-
- .line {
-   width: 80%;
-   border: 1px solid black;
-   border-radius: 10px;
-   overflow: hidden;
-   margin: 10px auto;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   .minusImg {
-     width: 20%;
-   }
-   .group {
-     display: flex;
-     flex-direction: column;
-   }
- }
-
- .global {
-   width: 80%;
-   display: flex;
-   justify-content: end;
-   margin: 10px auto;
-   border: 1px solid black;
-   border-radius: 10px;
-   overflow: hidden;
-   p {
-     padding: 10px;
-   }
- }
-
- .formulaire {
-   width: 80%;
-   display: flex;
-   justify-content: space-around;
-   flex-wrap: wrap;
-   border: 1px solid black;
-   border-radius: 10px;
-   overflow: hidden;
-   margin: 10px auto;
-   h2 {
-     width: 100%;
-     text-align: center;
-   }
-   input {
-     width: 35%;
-     margin: 10px;
-   }
- }
-
- .empty {
-   width: 70%;
-   margin: auto;
-   h2 {
-     color: blueviolet;
-     text-align: center;
-   }
-   p {
-     text-align: center;
-   }
- }
-
- .all {
-   display: flex;
-   justify-content: space-between;
-   .right {
-     width: 70%;
-   }
-
- }
-
- .center {
-   text-align: center;
- }
-
- .end {
-   margin-right: 5px;
- }
+.bold {
+  font-weight: bold;
+}

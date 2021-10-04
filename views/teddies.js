@@ -1,12 +1,13 @@
 console.log("hello world");
 
+//Fonction permettant d'afficher les produits reçus en paramètre
 function createStickies(allTeddies, i) {
     
     //Mise en place des elements structurant le HTML
     const stickies = document.createElement("div");
     const testA = document.createElement("a");
     const picture = document.createElement("img");
-    const banniere = document.createElement("div"); //todo trouver un meilleur nom pour "banniere" ?
+    const banniere = document.createElement("div");
 
     let elt = document.getElementById("list");
 
@@ -36,6 +37,8 @@ function createStickies(allTeddies, i) {
     let left = document.createElement("div")
     let prix = document.createElement("p");
 
+    titre.classList.add("pink")
+    prix.classList.add("pink")
     div.classList.add("all")
     description.classList.add("right")
     left.classList.add("left")
@@ -51,6 +54,7 @@ function createStickies(allTeddies, i) {
     prix.innerHTML = allTeddies[i].price /100 + " €";
 }
 
+//fonction en cas d'echec de communication avec le serveur
 function noServer(){
     const noSerever = document.createElement("div")
     const oups = document.createElement("h2")
@@ -62,12 +66,13 @@ function noServer(){
     noSerever.appendChild(oups)
     noSerever.appendChild(exp)
 
-    noSerever.classList.add("wrong")
+    noSerever.classList.add("info")
 
     oups.innerHTML = "Oups, quelque chose s'est mal passé"
     exp.innerHTML = "Verifier votre connexion à internet et/ou que le serveur soit bien allumé"
 }
 
+//Fonction permettant de récupérer les produits stoqués sur le serveur
 function getTeddies (){
     fetch("http://localhost:3000/api/teddies")
         .then(response => response.json())

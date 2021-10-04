@@ -1,0 +1,72 @@
+.line {
+  width: 80%;
+  @include box-border;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: larger;
+  .minusImg {
+    width: 20%;
+  }
+  @media (max-width: $mid_size) {
+    font-size: medium;
+  }
+  @media (max-width: $lit_size) {
+    width: 90%;
+    img{
+      display: none;
+    }
+    h2, p {
+      margin: 5px;
+    }
+  }
+}
+
+.group {
+  width: 30%;
+  @media (max-width: $lit_size) {
+    width: 45%;
+  }
+}
+
+.global {
+  width: 80%;
+  display: flex;
+  justify-content: end;
+  @include box-border;
+  font-size: larger;
+  p {
+    padding: 10px;
+  }
+  @media (max-width: $lit_size) {
+    width: 90%;
+    font-size: medium;
+  }
+}
+
+.formulaire {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px auto;
+  h2 {
+    width: 100%;
+    text-align: center;
+  }
+  input {
+    width: 35%;
+    margin: 10px;
+    padding: 10px;
+  }
+  @media (max-width: $lit_size) {
+    width: 90%;
+    input {
+      width: 80%;
+      font-size: larger;
+    }
+  }
+}

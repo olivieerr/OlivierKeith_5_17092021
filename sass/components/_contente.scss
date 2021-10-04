@@ -1,0 +1,9 @@
+.contenu {
+  text-align: center;
+  @media (min-width: $mid_size) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+

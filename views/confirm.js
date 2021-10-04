@@ -22,12 +22,13 @@ function createTicket() {
     ticket.appendChild(orderPrice)
     ticket.appendChild(thanks)
 
-    title.classList.add("coord")
-    thanks.classList.add("thank")
+    ticket.classList.add("info")
+    //title.classList.add("coord")
+    //thanks.classList.add("thank")
 
     title.innerHTML = "Récapitulatif de votre commande"
-    orderNumber.innerHTML = "Votre numéro de commande : " + teddyId[0].orderId
-    orderPrice.innerHTML = "Le prix total de votre commande : " + teddyId[0].totalPrice + " €"
+    orderNumber.innerHTML = "Votre numéro de commande : <span>" + teddyId[0].orderId + "</span>"
+    orderPrice.innerHTML = "Le prix total de votre commande : <span>" + teddyId[0].totalPrice + " €</span>"
     thanks.innerHTML = "Nous vous remercions de votre commande"
 
     //On nettoie le localStorage
