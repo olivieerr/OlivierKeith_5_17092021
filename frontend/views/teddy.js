@@ -146,12 +146,37 @@ function sendToBasket (teddy){
         console.log("couleur du teddy : " + color);
         let beer = new articles(teddy._id, color, quantity);
         let article = JSON.parse(localStorage.getItem("article"));
-
+        console.log("les articles", article);
         //Verification si il y a deja des objets dans le panier
         if(article) {
-            article.push(beer);
-            localStorage.setItem("article", JSON.stringify(article));
-            console.log(article);
+
+            let qt = 0;
+            for (let i = 0; i < article.length; i++) {
+                console.log("les items", article[i])
+                console.log("teddy id", teddy._id)
+                console.log("article id", article[i].id)
+                console.log("color article", article[i].color)
+                console.log("color", color)
+                if (teddy._id == article[i].id && article[i].color == color) {
+                    qt++;
+                    console.log("qt", qt)
+                }
+            }
+
+            if (qt > 0){
+                for (let i = 0; i < article.length; i++) {
+                    if (teddy._id == article[i].id && article[i].color == color) {
+                        article[i].quantity = parseInt(article[i].quantity) + parseInt(quantity);
+
+                        localStorage.setItem("article", JSON.stringify(article));
+                    }
+                }
+            }
+            else {
+                article.push(beer);
+                localStorage.setItem("article", JSON.stringify(article));
+                console.log(article);
+            }
         }
 
         //sinon, on crée un tableau vide

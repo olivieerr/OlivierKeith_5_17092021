@@ -1,6 +1,7 @@
 .solo {
   width: 80%;
   font-size: larger;
+  @include bg-color;
   @include box-border;
   img {
     width: 100%;

@@ -1,6 +1,7 @@
 /* couleur de fond*/
 body {
   background-color: $primaire;
+  font-family: sans-serif;
 }
  .main {
    max-width: $max-width;
@@ -30,10 +31,6 @@ body {
  h2, p {
    margin: 0;
  }
-
-
-
-
 
  .all {
    display: flex;

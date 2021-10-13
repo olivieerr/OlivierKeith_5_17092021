@@ -32,7 +32,7 @@ function createTicket() {
     thanks.innerHTML = "Nous vous remercions de votre commande"
 
     //On nettoie le localStorage
-    localStorage.clear()
+    localStorage.removeItem("article")
 
 }
 

@@ -6,6 +6,7 @@
 
 .etiquette {
   width: 35%;
+  @include bg-color;
   @include box-border;
   img {
     width: 100%;

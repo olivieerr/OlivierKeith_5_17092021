@@ -3,6 +3,7 @@ console.log("Hello world");
 //Rappel de nos données stockées dans le localStorage
 let article = JSON.parse(localStorage.getItem("article"));
 
+
 //variables et constantes gloables
 let totaux = 0;
 const globalPrice = document.createElement("p");
@@ -59,6 +60,11 @@ function createBasket(article,teddy, i) {
     const quantity = document.createElement("p");
     const price = document.createElement("p");
     const total = document.createElement("p");
+    const del = document.createElement("form");
+    //const button = document.createElement("button");
+    const cross = document.createElement("img");
+    //const cross = document.createElement("input")
+    const supp = document.createElement("input")
 
     orderLine.appendChild(image);
     orderLine.appendChild(group)
@@ -67,14 +73,33 @@ function createBasket(article,teddy, i) {
     group.appendChild(quantity);
     orderLine.appendChild(price);
     orderLine.appendChild(total);
+    orderLine.appendChild(del);
+    del.appendChild(cross)
+    //button.appendChild(cross);
+    del.appendChild(supp)
 
     //ajout des attributs particliers
     image.classList.add("minusImg");
     image.setAttribute( "src", teddy.imageUrl);
+    //button.setAttribute("id", "delete")
+    //button.setAttribute("type", "submit")
+    cross.setAttribute("type", "image")
+    cross.setAttribute("src", "css/times-circle-regular.svg");
+    cross.setAttribute("id", "delete"+i)
+    //cross.setAttribute("type", "submit");
+    //cross.setAttribute("value", "supprimer")
+    //supp.setAttribute("id", "nbLine")
+    supp.setAttribute("id", "nbLine"+i)
+    supp.setAttribute("type", "hidden");
+    //supp.setAttribute("value", i);
+
 
     name.classList.add("pink")
     group.classList.add("group")
     total.classList.add("end")
+    total.classList.add("width")
+    price.classList.add("width")
+    del.classList.add("cross")
 
     //ajout de la classe "elastic"
     name.classList.add("elastic")
@@ -87,6 +112,57 @@ function createBasket(article,teddy, i) {
     quantity.innerHTML = "Quantité désirée : " + article[i].quantity;
     price.innerHTML = "Prix unitaire : " + teddy.price /100 + " €";
     total.innerHTML = "Total : " + article[i].quantity * teddy.price / 100 + " €";
+    supp.innerHTML = i;
+
+   suppLine(i)
+
+}
+
+function suppLine(i) {
+
+    const tri = document.getElementById("delete"+i)
+    console.log("le tri", tri)
+    tri.addEventListener("click", function () {
+        let line = document.getElementById("nbLine"+i).innerText;
+        console.log("click ok")
+        console.log("numero de line", line)
+        console.log("avant le splice", article)
+        article.splice(line, 1);
+        localStorage.setItem("article", JSON.stringify(article));
+        console.log("dans essai", article)
+        if(article.length == 0){
+            console.log("dnas le if plus d'article")
+            console.log("artilce ? ", article)
+            localStorage.removeItem("article")
+
+        }
+        window.location.reload()
+    })
+}
+
+function emptyBasket() {
+    const containt = document.createElement("div")
+    const btn = document.createElement("button")
+
+    let elt = document.getElementById("del")
+
+    elt.appendChild(containt);
+    containt.appendChild(btn);
+
+    containt.classList.add("containt")
+    btn.setAttribute("id", "empty")
+    //btn.setAttribute("value", "Vider votre panier")
+
+    btn.innerHTML = "Vider votre panier"
+
+    btn.addEventListener("click", function (){
+        console.log("click ok sur vider panier")
+        localStorage.removeItem("article")
+        console.log("panier vide ?")
+        console.log(article)
+        window.location.reload()
+    })
+
 
 }
 
@@ -209,10 +285,6 @@ function validateOrder(article) {
             console.log("http://localhost:3000/api/teddies/order", send)
             sendOrder(send)
         }
-
-
-
-
     })
 }
 
@@ -290,6 +362,7 @@ function noBasket() {
 //Affichage des toutes les lignes du panier
 function basketLines(article) { //todo nom achanger ou voir si encore besoin
     createTotal()
+    console.log(article);
     for (let i in article) {
         fetch("http://localhost:3000/api/teddies/" + article[i].id)
             .then(response => response.json())
@@ -298,6 +371,7 @@ function basketLines(article) { //todo nom achanger ou voir si encore besoin
                 console.log(article[i].id + " "+article[i].color + " " + article[i].quantity);
 
                 createBasket(article, teddy, i);
+                //essai();
 
 
                 let prix = parseInt(teddy.price, 10);
@@ -322,8 +396,22 @@ if(article) {
     basketLines(article)
     createForm();
     validateOrder(article)
+    emptyBasket()
+    //essai()
+    console.log("dans le if", article)
 }
 else {
     noBasket()
+    console.log("dans le else", article)
 }
 
+
+/*const tri = document.getElementById("delete")
+console.log("le tri", tri)
+tri.addEventListener("click", function () {
+    let line = document.getElementById("nbLine");
+    console.log("click ok")
+    console.log("numero de line", line)
+    //article.splice(i, 1);
+    //localStorage.setItem("article", JSON.stringify(article));
+})*/
