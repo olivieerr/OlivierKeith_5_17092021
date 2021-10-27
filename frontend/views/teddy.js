@@ -14,7 +14,7 @@ class articles {
 
 function createSticky(teddy) {
 
-    //creation des elements HTML
+    //création des éléments HTML
     const sticky = document.createElement("div");
     const picture = document.createElement("img");
     const banniere = document.createElement("div");
@@ -22,9 +22,10 @@ function createSticky(teddy) {
     //Selection du noeud
     let elt = document.getElementById("presentation");
 
-    //integration du conteneur principal
+    //intégration du conteneur principal
     elt.appendChild(sticky);
-    //atrtibution d'une classe
+
+    //attribution d'une classe
     sticky.classList.add("solo");
 
     //mise en place de l'image
@@ -36,7 +37,7 @@ function createSticky(teddy) {
     sticky.appendChild(banniere);
     banniere.classList.add("contenu");
 
-    //décalration des differents elements
+    //décalration des différents éléments
     let titre = document.createElement("h2");
     let all = document.createElement("div")
     let description = document.createElement("p");
@@ -49,7 +50,7 @@ function createSticky(teddy) {
     titre.classList.add("pink")
     prix.classList.add("pink")
 
-    //Mise en place des elements precedents déclarés
+    //Mise en place des éléments précédemments déclarés
     banniere.appendChild(titre);
     titre.innerHTML = teddy.name;
     banniere.appendChild(all);
@@ -62,9 +63,7 @@ function createSticky(teddy) {
     //mise en place du formulaire : couleur + bouton ajouter
     const form = document.createElement("form");
     const color = document.createElement("select");
-    //const options = document.createElement("option")
     const quantity = document.createElement("select");
-    //const send = document.createElement("button");
 
     banniere.appendChild(form);
     color.classList.add("color");
@@ -73,7 +72,7 @@ function createSticky(teddy) {
     color.setAttribute("id", "color");
     color.setAttribute("name", "couleur choisie");
 
-    //boucle pour générer les differentes couleurs
+    //boucle pour générer les différentes couleurs
     for (let i in teddy.colors){
         let options = document.createElement("option")
         color.appendChild(options);
@@ -99,7 +98,7 @@ function createSticky(teddy) {
     send.innerHTML = "Ajouter au panier";
 }
 
-//fonction permettant de récupéré la quantité de produit désirée
+//fonction permettant de récupérer la quantité de produit désirée
 function nbTeddies () {
     let selectQuantity = document.getElementById("quantity");
     let quantity = selectQuantity.options[selectQuantity.selectedIndex].value;
@@ -107,7 +106,7 @@ function nbTeddies () {
     return quantity;
 }
 
-//Fonction permettant de recupéré la couleur du produit désiré
+//Fonction permettant de recupérer la couleur du produit désirée
 function whatColor() {
     let selectColor = document.getElementById("color");
     let color = selectColor.options[selectColor.selectedIndex].value;
@@ -147,6 +146,7 @@ function sendToBasket (teddy){
         let beer = new articles(teddy._id, color, quantity);
         let article = JSON.parse(localStorage.getItem("article"));
         console.log("les articles", article);
+
         //Verification si il y a deja des objets dans le panier
         if(article) {
 
@@ -194,13 +194,13 @@ function sendToBasket (teddy){
     });
 }
 
-//Récupération des informations récues de la pages précedente
+//Récupération des informations reçues de la pages précédente
 let searchParams = new URLSearchParams(window.location.search);
 console.log(searchParams.has("id"))
 let id = searchParams.get("id");
 console.log(id);
 
-//fonction récupérant les information envoyées en d'afficher le bon produit
+//fonction récupérant les informations envoyées afin d'afficher le bon produit
 function getTeddy() {
     fetch("http://localhost:3000/api/teddies/" + id)
         .then(response => response.json())

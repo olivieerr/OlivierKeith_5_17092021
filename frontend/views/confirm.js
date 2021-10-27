@@ -23,8 +23,6 @@ function createTicket() {
     ticket.appendChild(thanks)
 
     ticket.classList.add("info")
-    //title.classList.add("coord")
-    //thanks.classList.add("thank")
 
     title.innerHTML = "Récapitulatif de votre commande"
     orderNumber.innerHTML = "Votre numéro de commande : <span>" + teddyId[0].orderId + "</span>"

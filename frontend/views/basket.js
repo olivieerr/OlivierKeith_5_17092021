@@ -41,7 +41,7 @@ function noServer() {
     exp.innerHTML = "Verifier votre connexion à internet et/ou que le serveur soit bien allumé"
 }
 
-//creation des élements du panier
+//creation des éléments du panier
 function createBasket(article,teddy, i) {
     const orderLine = document.createElement("div");
 
@@ -53,6 +53,7 @@ function createBasket(article,teddy, i) {
     elt.appendChild(orderLine);
     orderLine.classList.add("line");
 
+    //mise en place des éléments HTML
     const image = document.createElement("img");
     const group = document.createElement("div")
     const name = document.createElement("h2");
@@ -61,11 +62,10 @@ function createBasket(article,teddy, i) {
     const price = document.createElement("p");
     const total = document.createElement("p");
     const del = document.createElement("form");
-    //const button = document.createElement("button");
     const cross = document.createElement("img");
-    //const cross = document.createElement("input")
     const supp = document.createElement("input")
 
+    //mise en place des éléments précédemments créés
     orderLine.appendChild(image);
     orderLine.appendChild(group)
     group.appendChild(name);
@@ -75,24 +75,16 @@ function createBasket(article,teddy, i) {
     orderLine.appendChild(total);
     orderLine.appendChild(del);
     del.appendChild(cross)
-    //button.appendChild(cross);
     del.appendChild(supp)
 
     //ajout des attributs particliers
     image.classList.add("minusImg");
     image.setAttribute( "src", teddy.imageUrl);
-    //button.setAttribute("id", "delete")
-    //button.setAttribute("type", "submit")
     cross.setAttribute("type", "image")
     cross.setAttribute("src", "css/times-circle-regular.svg");
     cross.setAttribute("id", "delete"+i)
-    //cross.setAttribute("type", "submit");
-    //cross.setAttribute("value", "supprimer")
-    //supp.setAttribute("id", "nbLine")
     supp.setAttribute("id", "nbLine"+i)
-    supp.setAttribute("type", "hidden");
-    //supp.setAttribute("value", i);
-
+    supp.setAttribute("type", "hidden")
 
     name.classList.add("pink")
     group.classList.add("group")
@@ -106,7 +98,7 @@ function createBasket(article,teddy, i) {
     color.classList.add("elastic")
     quantity.classList.add("elastic")
 
-    //injection des elements
+    //injection des éléments
     name.innerHTML = teddy.name;
     color.innerHTML = "Couleur choisie : " + article[i].color;
     quantity.innerHTML = "Quantité désirée : " + article[i].quantity;
@@ -151,7 +143,6 @@ function emptyBasket() {
 
     containt.classList.add("containt")
     btn.setAttribute("id", "empty")
-    //btn.setAttribute("value", "Vider votre panier")
 
     btn.innerHTML = "Vider votre panier"
 
@@ -179,7 +170,7 @@ function createTotal () {
 
 function createForm() {
 
-    //création des elements du formulaire
+    //création des éléments du formulaire
     const form = document.createElement("form");
     const title = document.createElement("h2");
     const firstName = document.createElement("input");
@@ -189,10 +180,10 @@ function createForm() {
     const email = document.createElement("input");
     const send = document.createElement("input");
 
-    //Selection du noeud
+    //Séléction du noeud
     let elt = document.getElementById("form");
 
-    //Mise en place des elements créés
+    //Mise en place des éléments créés
     elt.appendChild(form);
     form.appendChild(title);
     form.appendChild(firstName);
@@ -202,10 +193,9 @@ function createForm() {
     form.appendChild(email);
     form.appendChild(send);
 
-    //Mise en place des attibuts
+    //Mise en place des attributs
     form.setAttribute("method", "POST");
     form.classList.add("formulaire")
-    //form.setAttribute("action", "http://localhost:3000/api/teddies/")
     title.setAttribute("id", "coord")
     title.innerHTML = "Vos coordonnées"
     firstName.setAttribute("type", "text");
@@ -241,7 +231,7 @@ function validateOrder(article) {
         console.log("clic ok")
 
 
-        //variable recuperées du formulaire attendue par le backend
+        //variables récuperées du formulaire et attendue par le backend
         let firstName = document.getElementById("firstName")
         let lastName = document.getElementById("lastName")
         let address = document.getElementById("address")
@@ -265,7 +255,7 @@ function validateOrder(article) {
             products: teddyId
         }
 
-        //verification du formulaire
+        //vérification du formulaire
         if (!firstName.value ||
         !lastName.value||
         !regexAddress.test(address.value) ||
@@ -359,7 +349,7 @@ function noBasket() {
 }
 
 
-//Affichage des toutes les lignes du panier
+//Affichage de toutes les lignes du panier
 function basketLines(article) { //todo nom achanger ou voir si encore besoin
     createTotal()
     console.log(article);
@@ -371,8 +361,6 @@ function basketLines(article) { //todo nom achanger ou voir si encore besoin
                 console.log(article[i].id + " "+article[i].color + " " + article[i].quantity);
 
                 createBasket(article, teddy, i);
-                //essai();
-
 
                 let prix = parseInt(teddy.price, 10);
                 let quantite = parseInt(article[i].quantity, 10);
@@ -397,21 +385,9 @@ if(article) {
     createForm();
     validateOrder(article)
     emptyBasket()
-    //essai()
     console.log("dans le if", article)
 }
 else {
     noBasket()
     console.log("dans le else", article)
 }
-
-
-/*const tri = document.getElementById("delete")
-console.log("le tri", tri)
-tri.addEventListener("click", function () {
-    let line = document.getElementById("nbLine");
-    console.log("click ok")
-    console.log("numero de line", line)
-    //article.splice(i, 1);
-    //localStorage.setItem("article", JSON.stringify(article));
-})*/

@@ -13,6 +13,7 @@ function createStickies(allTeddies, i) {
 
     //integration du conteneur principal
     elt.appendChild(stickies);
+
     //atrtibution d'une classe
     stickies.classList.add("etiquette");
 
@@ -30,7 +31,7 @@ function createStickies(allTeddies, i) {
     testA.appendChild(banniere);
     banniere.classList.add("contenu");
 
-    //décalration des differents elements
+    //décalration des différents éléments
     let titre = document.createElement("h2");
     let div = document.createElement("div")
     let description = document.createElement("p");
@@ -43,7 +44,7 @@ function createStickies(allTeddies, i) {
     description.classList.add("right")
     left.classList.add("left")
 
-    //Mise en place des elements precedents déclarés
+    //Mise en place des éléments précedemments déclarés
     banniere.appendChild(titre);
     titre.innerHTML = allTeddies[i].name;
     banniere.appendChild(div)
@@ -54,7 +55,7 @@ function createStickies(allTeddies, i) {
     prix.innerHTML = allTeddies[i].price /100 + " €";
 }
 
-//fonction en cas d'echec de communication avec le serveur
+//fonction en cas d'échec de communication avec le serveur
 function noServer(){
     const noSerever = document.createElement("div")
     const oups = document.createElement("h2")
@@ -72,7 +73,7 @@ function noServer(){
     exp.innerHTML = "Verifier votre connexion à internet et/ou que le serveur soit bien allumé"
 }
 
-//Fonction permettant de récupérer les produits stoqués sur le serveur
+//Fonction permettant de récupérer les produits stockés sur le serveur
 function getTeddies (){
     fetch("http://localhost:3000/api/teddies")
         .then(response => response.json())
